@@ -1,0 +1,32 @@
+{% extends '../detailview.html'%}
+{% load templatetags%}
+{% block content %}
+<div class="row">
+    <h1 class="text-secondary">category: {{ vivod.category}}</h1>
+    <h1 class="text-primary">{{ vivod.title}}</h1>
+    <div style="display: flex;">
+        {% if vivod.data|get_color:vivod.now_data %}
+            <h1 style="margin-left: auto;color: #27ff00 ;">{{ vivod.data }}</h1><h1 style="margin-left: 10px;">{{vivod.now_data}}</h1>
+        {% else %}
+        <h1 style="margin-left: auto;color: #FF0000 ;">{{ vivod.data }}</h1><h1 style="margin-left: 10px;">{{vivod.now_data}}</h1>
+        {% endif%}
+    </div>
+    <h3 style="color: #0d6efd;">{{ vivod.desctiption }}</h3>
+    <hr/>
+    <div style="display: flex;">
+        <h3 style="margin-left: auto;"><a class="a" href="{% url 'create' id=vivod.id %}">print</a></h3>
+    </div>
+{% for comment in comment %}
+<span class="text-secondary">{{comment.author}}</span><br>
+<span class="border border-primary rounded text-primary px-4 py-4 mx-5">{{comment.text}}</span><br>
+{{comment.image|safe}}
+{{comment.content|safe}}
+<div style="display: flex;">
+    <div style="margin-left: auto;">
+    <a class="a" href="{% url 'update' id=comment.id vivod_id=vivod.id  %}">update</a><br><br>
+    <a class="a" href="{% url 'delete' id=comment.id vivod_id=vivod.id %}">delete</a>
+    </div>
+</div><hr>
+{% endfor %}
+</div>
+{% endblock %}

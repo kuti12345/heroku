@@ -1,0 +1,25 @@
+{% extends '../index.html'%}
+{% block content %}
+<div class="row">
+    <div class="w">
+        {% for cotagory in cotagory %}
+            <h4><a href="{% url 'list' id=cotagory.id %}">{{cotagory.title}}</a></h4>
+            {{ cotagory.col_visit}}
+            <br>
+        {% endfor %}
+    </div>
+    <div class="w2">
+    {% for detail in detail %}<br>
+    <a href="{% url 'vivod' id=detail.id %}">
+    <div style="margin-bottom: 1em;margin-left: 2em;">
+       <h4>{{ detail.title}}</h4>
+        <div style="display: flex;"><div style="margin-left: auto;">{{ detail.visit}}</div></div>
+    </div><hr>
+    </a>
+    {% endfor%}
+    
+    </div>
+</div>
+<div class="pfon">
+</div>
+{% endblock %}
